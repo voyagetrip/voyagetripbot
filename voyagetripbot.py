@@ -1,12 +1,7 @@
 
-from telegram.ext import (
-    ApplicationBuilder,
-    CommandHandler,
-    MessageHandler,
-    ConversationHandler,
-    ContextTypes,
-    filters,
-)
+from telegram import Update
+from telegram.ext import ContextTypes
+
 
 
 BOT_TOKEN = '7209793844:AAHk1ilKgHRMbhbcDI1hZD7hFVowtYwHiR4'
