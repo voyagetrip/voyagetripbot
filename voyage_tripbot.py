@@ -85,19 +85,18 @@ async def get_phone(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ASK_DATES
 
 async def get_dates(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["dates"] = update.message.text
-    user = context.user_data
-    selected_hotel = user["hotels"][0] if user.get("hotels") else "-"
-message = (
-    f"🚀 Новая заявка!\n\n"
-   f"Имя: {context.user_data['name']}\n"
-    f"Телефон: {context.user_data['phone']}\n"
-    f"Даты поездки: {context.user_data['dates']}\n"
-    f"Страна: {context.user_data['country']}\n"
-    f"Город: {context.user_data['city']}\n"
-    f"Категория: {context.user_data['stars']}\n"
-    f"Предпочтительный отель: {context.user_data['hotel']}\n"
-)
+    context.user_data['dates'] = update.message.text
+    message = (
+        f"🚀 Новая заявка!\n\n"
+        f"Имя: {context.user_data['name']}\n"
+        f"Телефон: {context.user_data['phone']}\n"
+        f"Даты поездки: {context.user_data['dates']}\n"
+        f"Страна: {context.user_data.get('country', '-')}\n"
+        f"Город: {context.user_data.get('city', '-')}\n"
+        f"Категория: {context.user_data.get('stars', '-')} звезды\n"
+        f"Предпочтительный отель: {context.user_data.get('hotels', ['-'])[0]}"
+    )
+
 
 async def get_dates(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ...
