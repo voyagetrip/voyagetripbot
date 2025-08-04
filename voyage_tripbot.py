@@ -110,7 +110,9 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 if __name__ == "__main__":
-    app = ApplicationBuilder().token("7209793844:AAHk1ilKgHRMbhbcDI1hZD7hFVowtYwHiR4").build()
+    import os
+app = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
+
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button))
