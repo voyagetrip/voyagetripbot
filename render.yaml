@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: voyage-tripbot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python voyage_tripbot.py
+    runtime: python-3.11
