@@ -88,15 +88,17 @@ async def get_dates(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["dates"] = update.message.text
     user = context.user_data
     selected_hotel = user["hotels"][0] if user.get("hotels") else "-"
-    message = (f"🚀 Новая заявка!"
-        f"Имя: {user['name']}
-        Телефон: {user['phone']}"
-        f"Даты: {user['dates']}"
-        f"Страна: {user.get('country', '-')}"
-        f"Город: {user.get('city', '-')}"
-        f"Категория: {user.get('stars', '-')} звёзд"
-        f"Отель: {selected_hotel}"
-    )
+message = (
+    f"🚀 Новая заявка!\n\n"
+    f"Имя: {user['name']}\n"
+    f"Телефон: {user['phone']}\n"
+    f"Даты поездки: {user['dates']}\n"
+    f"Страна: {user['country']}\n"
+    f"Город: {user['city']}\n"
+    f"Категория: {user['stars']} звезды\n"
+    f"Предпочтительный отель: {user['hotel']}"
+)
+
     await context.bot.send_message(chat_id='@voyagetrip', text=message)
     await update.message.reply_text("✅ Спасибо! Мы свяжемся с вами в ближайшее время.")
     return ConversationHandler.END
