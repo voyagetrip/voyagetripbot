@@ -57,7 +57,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["city"] = city
         stars = hotels[country][city]
         keyboard = [[InlineKeyboardButton(f"{s} ⭐", callback_data=f"{country}|{city}|{s}")] for s in stars]
-        await query.edit_message_text(f"📍 {city}
+        await query.edit_message_text(f"📍 {city}\n⭐ Выберите категорию отеля:", reply_markup=InlineKeyboardMarkup(keyboard))
 ⭐ Выберите категорию отеля:", reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif len(parts) == 3:
