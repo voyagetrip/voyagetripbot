@@ -114,17 +114,23 @@ if __name__ == "__main__":
 app = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
 
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(button))
-    app.add_handler(ConversationHandler(
+    if __name__ == "__main__":
+    app = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
+
+    conv_handler = ConversationHandler(
         entry_points=[CommandHandler("book", book)],
         states={
             ASK_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_name)],
             ASK_PHONE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_phone)],
-            ASK_DATES: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_dates)],
+            ASK_DATES: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_dates)]
         },
         fallbacks=[CommandHandler("cancel", cancel)]
-    ))
+    )
+
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CallbackQueryHandler(button))
+    app.add_handler(conv_handler)
 
     print("✅ Бот запущен")
     app.run_polling()
+
