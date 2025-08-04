@@ -99,9 +99,12 @@ message = (
     f"Предпочтительный отель: {user['hotel']}"
 )
 
+async def get_dates(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    ...
     await context.bot.send_message(chat_id='@voyagetrip', text=message)
     await update.message.reply_text("✅ Спасибо! Мы свяжемся с вами в ближайшее время.")
     return ConversationHandler.END
+
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("❌ Заявка отменена.")
