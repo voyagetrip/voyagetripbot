@@ -90,13 +90,13 @@ async def get_dates(update: Update, context: ContextTypes.DEFAULT_TYPE):
     selected_hotel = user["hotels"][0] if user.get("hotels") else "-"
 message = (
     f"🚀 Новая заявка!\n\n"
-    f"Имя: {user['name']}\n"
-    f"Телефон: {user['phone']}\n"
-    f"Даты поездки: {user['dates']}\n"
-    f"Страна: {user['country']}\n"
-    f"Город: {user['city']}\n"
-    f"Категория: {user['stars']} звезды\n"
-    f"Предпочтительный отель: {user['hotel']}"
+   f"Имя: {context.user_data['name']}\n"
+    f"Телефон: {context.user_data['phone']}\n"
+    f"Даты поездки: {context.user_data['dates']}\n"
+    f"Страна: {context.user_data['country']}\n"
+    f"Город: {context.user_data['city']}\n"
+    f"Категория: {context.user_data['stars']}\n"
+    f"Предпочтительный отель: {context.user_data['hotel']}\n"
 )
 
 async def get_dates(update: Update, context: ContextTypes.DEFAULT_TYPE):
