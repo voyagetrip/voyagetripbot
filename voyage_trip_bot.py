@@ -51,7 +51,6 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         cities = hotels[country]
         keyboard = [[InlineKeyboardButton(city, callback_data=f"{country}|{city}")] for city in cities]
         await query.edit_message_text(f"🌍 {country}\n📍 Выберите город:", reply_markup=InlineKeyboardMarkup(keyboard))
-📍 Выберите город:", reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif len(parts) == 2:
         country, city = parts
