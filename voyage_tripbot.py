@@ -50,32 +50,23 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["country"] = country
         cities = hotels[country]
         keyboard = [[InlineKeyboardButton(city, callback_data=f"{country}|{city}")] for city in cities]
-        await query.edit_message_text(f"🌍 {country}\n📍 Выберите город:", reply_markup=InlineKeyboardMarkup(keyboard))
-📍 Выберите город:", reply_markup=InlineKeyboardMarkup(keyboard))
+        await query.edit_message_text(f"🌍 {country}\n📍 Выберите город:", reply_markup=InlineKeyboardMarkup(keyboard))📍 Выберите город:", reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif len(parts) == 2:
         country, city = parts
         context.user_data["city"] = city
         stars = hotels[country][city]
         keyboard = [[InlineKeyboardButton(f"{s} ⭐", callback_data=f"{country}|{city}|{s}")] for s in stars]
-        await query.edit_message_text(f"📍 {city}\n⭐ Выберите категорию отеля:", reply_markup=InlineKeyboardMarkup(keyboard))
-⭐ Выберите категорию отеля:", reply_markup=InlineKeyboardMarkup(keyboard))
+        await query.edit_message_text(f"📍 {city}\n⭐ Выберите категорию отеля:", reply_markup=InlineKeyboardMarkup(keyboard))⭐ Выберите категорию отеля:", reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif len(parts) == 3:
         country, city, star = parts
         context.user_data.update({"country": country, "city": city, "stars": star})
         hotel_list = hotels[country][city][star]
         context.user_data["hotels"] = hotel_list
-        text = f"📍 Город: {city}
-⭐ Категория: {star} звёзд
-
-"
+        text = f"📍 Город: {city}⭐ Категория: {star} звёзд"
         for h in hotel_list:
-            text += f"🏨 {h}
-💰 от ... / ночь
-ℹ️ Цена зависит от сезона
-
-"
+            text += f"🏨 {h}💰 от ... / ночь ℹ️ Цена зависит от сезона"
         text += "📝 Чтобы оставить заявку, введите команду: /book"
         await query.edit_message_text(text)
 
@@ -97,21 +88,13 @@ async def get_dates(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["dates"] = update.message.text
     user = context.user_data
     selected_hotel = user["hotels"][0] if user.get("hotels") else "-"
-    message = (
-        f"🚀 Новая заявка!
-
-"
+    message = (f"🚀 Новая заявка!"
         f"Имя: {user['name']}
-Телефон: {user['phone']}
-"
-        f"Даты: {user['dates']}
-"
-        f"Страна: {user.get('country', '-')}
-"
-        f"Город: {user.get('city', '-')}
-"
-        f"Категория: {user.get('stars', '-')} звёзд
-"
+        Телефон: {user['phone']}"
+        f"Даты: {user['dates']}"
+        f"Страна: {user.get('country', '-')}"
+        f"Город: {user.get('city', '-')}"
+        f"Категория: {user.get('stars', '-')} звёзд"
         f"Отель: {selected_hotel}"
     )
     await context.bot.send_message(chat_id='@voyagetrip', text=message)
